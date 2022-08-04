@@ -4,7 +4,6 @@ import random
 import numpy as np
 from PIL import Image
 import torch.utils.data as data
-from collections import defaultdict
 
 object_list = ['bottle_01', 'bottle_02', 'bottle_03', 'bottle_04',
                'bowl_01', 'bowl_02', 'bowl_03', 'bowl_04', 'bowl_05',

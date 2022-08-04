@@ -24,7 +24,7 @@ class SoftmaxLayer(torch.nn.Module):
 
 class OfflineSoftmax(nn.Module):
     """
-    This is an implementation of the Streaming Softmax algorithm for streaming learning.
+    This is an implementation of the Softmax algorithm.
     """
 
     def __init__(self, args, input_shape, num_classes, backbone=None, device='cuda', lr=0.01,

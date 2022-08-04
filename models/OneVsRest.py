@@ -79,35 +79,6 @@ class OneVsRest(nn.Module):
         self.num_updates += 1
 
     @torch.no_grad()
-    def predict_old(self, X, return_probas=False):
-        """
-        Make predictions on test data X.
-        :param X: a torch tensor that contains N data samples (N x d)
-        :param return_probas: True if the user would like probabilities instead of predictions returned
-        :return: the test predictions or probabilities
-        """
-        X = X.to(self.device)
-
-        scores = torch.zeros((len(X), self.num_classes))
-        visited_ix = torch.where(self.cK > 0)[0]
-        for c in visited_ix:
-            y = torch.matmul(X, self.muK[c, :])
-            not_y = torch.matmul(X, self.notmuK[c, :])
-            score = y / (y + not_y)
-            scores[:, c] = score
-
-        not_visited_ix = torch.where(self.cK == 0)[0]
-        min_col = torch.min(scores, dim=1)[0].unsqueeze(0) - 1
-        scores[:, not_visited_ix] = min_col.tile(len(not_visited_ix)).reshape(
-            len(not_visited_ix), len(X)).transpose(1, 0)  # mask off scores for unseen classes
-
-        # return predictions or probabilities
-        if not return_probas:
-            return scores.cpu()
-        else:
-            return torch.softmax(scores, dim=1).cpu()
-
-    @torch.no_grad()
     def fit(self, x, y, item_ix):
         """
         Fit the model to a new sample (x,y).
@@ -172,10 +143,6 @@ class OneVsRest(nn.Module):
             return scores.cpu()
         else:
             return torch.softmax(scores, dim=1).cpu()
-
-    @torch.no_grad()
-    def ood_predict(self, x):
-        return self.predict(x, return_probas=True)
 
     @torch.no_grad()
     def ood_predict(self, x):

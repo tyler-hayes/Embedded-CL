@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 PROJ_ROOT=/media/tyler/Data/codes/Embedded-CL
 export PYTHONPATH=${PROJ_ROOT}
-source activate base
+source activate embedded_cl
 cd ${PROJ_ROOT}/openloris
 
-SAVE_DIR=/media/tyler/Data/codes/Embedded-CL/reproduce_results/
+SAVE_DIR=/media/tyler/Data/codes/Embedded-CL/results/
 IMAGES_DIR=/media/tyler/Data/datasets/FSIOL-310/object_images
 DATASET=fsiol
 LR=0.001

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 PROJ_ROOT=/media/tyler/Data/codes/Embedded-CL
 export PYTHONPATH=${PROJ_ROOT}
-source activate base
+source activate embedded_cl
 cd ${PROJ_ROOT}
 
-SAVE_DIR=/media/tyler/Data/codes/Embedded-CL/reproduce_results/
-CACHE_PATH=/media/tyler/Data/codes/edge-cl/features
+SAVE_DIR=/media/tyler/Data/codes/Embedded-CL/results/
+FEATURES_DIR=/media/tyler/Data/codes/edge-cl/features
 IN_MEMORY=0
 NUM_WORKERS=8
 DATASET=places
@@ -20,7 +20,7 @@ for CL_MODEL in ncm nb slda replay fine_tune ovr perceptron; do
       MODEL="${MODELS[i]}"
 
       echo "Model: ${MODEL}; Dataset: ${DATASET}; Pool: ${POOL}"
-      CACHE=${CACHE_PATH}/${DATASET}/supervised_${MODEL}_${DATASET}_${POOL}
+      CACHE=${FEATURES_DIR}/${DATASET}/supervised_${MODEL}_${DATASET}_${POOL}
       EXPT_NAME=streaming_${CL_MODEL}_LR_${LR}_${MODEL}_${DATASET}_${POOL}_${DATA_ORDER}_seed_${PERMUTATION_SEED}
       LOG_FILE=${SAVE_DIR}/logs/${EXPT_NAME}.log
 
@@ -45,7 +45,7 @@ for CL_MODEL in replay; do
       MODEL="${MODELS[i]}"
 
       echo "Model: ${MODEL}; Dataset: ${DATASET}; Pool: ${POOL}"
-      CACHE=${CACHE_PATH}/${DATASET}/supervised_${MODEL}_${DATASET}_${POOL}
+      CACHE=${FEATURES_DIR}/${DATASET}/supervised_${MODEL}_${DATASET}_${POOL}
       EXPT_NAME=streaming_${CL_MODEL}_2percls_LR_${LR}_${MODEL}_${DATASET}_${POOL}_${DATA_ORDER}_seed_${PERMUTATION_SEED}
       LOG_FILE=${SAVE_DIR}/logs/${EXPT_NAME}.log
 

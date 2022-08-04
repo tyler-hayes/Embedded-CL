@@ -5,7 +5,7 @@ from torch import nn
 
 class Perceptron(nn.Module):
     """
-    This is an implementation of the Online Passive Aggressive algorithm for streaming learning.
+    This is an implementation of the Perceptron algorithm for streaming learning.
     """
 
     def __init__(self, input_shape, num_classes, backbone=None, device='cuda'):
